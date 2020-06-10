@@ -1,44 +1,40 @@
 import React from "react";
 import Header from "./Header";
 import UserCreate from "./UserCreate";
-import LanguageContext from "../context/LanguageContext";
+import { LanguageStore } from "../context/LanguageContext";
 import ColorContext from "../context/ColorContext";
+import LanguageSelector from "./LanguageSelector";
 
 class App extends React.Component {
-  state = {
-    language: "ENGLISH",
-    btnColor: "blue",
-  };
-
-  changeLanguage = (language, btnColor) => {
-    this.setState({ language, btnColor });
-  };
   render() {
     return (
-      <div className="App">
+      <div className="App bg-gray-900 h-screen">
         <Header />
-        <div className="form container px-4 justify-center mx-auto flex flex-col items-center w-6/12">
-          <div className="mx-auto">
-            <h1 className="text-xl text-blue-500">Select a language</h1>
-          </div>
-          <div className="flex flex-row mb-8 mt-8 justify-center items-center">
-            <i
-              className="fas fa-flag-usa fa-2x mr-8 w-10 h-10"
-              onClick={() => this.changeLanguage("ENGLISH", "red")}
-            ></i>
-            <img
-              src="/iconfinder_france_5320692.png"
-              className="w-10 h-10"
-              onClick={() => this.changeLanguage("DUTCH", "blue")}
-            ></img>
-          </div>
+        <div className="form container px-4 justify-center mx-auto flex flex-col  text-white">
+          <LanguageStore>
+            <LanguageSelector />
 
-          <LanguageContext.Provider value={this.state.language}>
-            <ColorContext.Provider value={this.state.btnColor}>
+            <ColorContext.Provider value="red">
               <UserCreate />
             </ColorContext.Provider>
-          </LanguageContext.Provider>
+          </LanguageStore>
         </div>
+        <p className="mt-10 text-center mx-auto text-white">
+          Icons made by <span> </span>
+          <a
+            href="https://www.flaticon.com/authors/freepik"
+            className="text-blue-700"
+            title="Freepik"
+          >
+            Freepik
+          </a>
+          <span> </span>
+          from
+          <a href="https://www.flaticon.com/" title="Flaticon">
+            {" "}
+            www.flaticon.com
+          </a>
+        </p>
       </div>
     );
   }

@@ -11,23 +11,21 @@ class Button extends React.Component {
         className={`bg-${color}-500 p-2 rounded text-white hover:shadow-xl transition ease-in-out duration-300`}
       >
         <LanguageContext.Consumer>
-          {(value) => this.renderSubmit(value)}
+          {({ language }) => this.renderSubmit(language)}
         </LanguageContext.Consumer>
       </button>
     );
   }
 
-  renderSubmit = (value) => {
-    return value === "ENGLISH" ? "SUBMIT" : "Voorleggen";
+  renderSubmit = (language) => {
+    return language === "ENGLISH" ? "SUBMIT" : "Voorleggen";
   };
   render() {
-    console.log(this.context);
-
     return (
       <div>
-        <ColorContext.Consumer>
-          {(color) => this.renderButton(color)}
-        </ColorContext.Consumer>
+        <LanguageContext.Consumer>
+          {({ color }) => this.renderButton(color)}
+        </LanguageContext.Consumer>
       </div>
     );
   }
